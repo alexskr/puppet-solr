@@ -1,21 +1,21 @@
 # @summary Downloads and installs a file into solr's lib directory.
 #
-# @param [String] url
+# @param url
 #   A file to download and install to the solr's lib directory.
 #
-# @param [Optional[String]] filename
+# @param filename
 #   If the name of the file is to be different than the filename from the
 #   the url, the name of the file can be set.
 #
-# @param [String] path
+# @param path
 #   The path to copy the file.
 #   If setting a custom path, this module does not handle
 #   maintaining the path, this is up to the calling module.
 #
-# @param [Optional[String]] web_user
+# @param web_user
 #   The user name of the url to download.
 #
-# @param [Optional[String]] web_password
+# @param web_password
 #   The user's password to download the file.
 #
 define solr::shared_lib (

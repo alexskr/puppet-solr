@@ -1,4 +1,4 @@
-# solr Puppet Module
+# Solr Puppet Module
 
 [![Puppet Forge](http://img.shields.io/puppetforge/v/landcareresearch/solr.svg)](https://forge.puppetlabs.com/landcaresearch/solr)
 [![Bitbucket Build Status](http://build.landcareresearch.co.nz/app/rest/builds/buildType%3A%28id%3ALinuxAdmin_PuppetSolr_PuppetSolr%29/statusIcon)](http://build.landcareresearch.co.nz/viewType.html?buildTypeId=LinuxAdmin_PuppetSolr_PuppetSolr&guest=1)
@@ -9,7 +9,7 @@ Installs and configures [apache solr](http://lucene.apache.org/solr) and runs th
 
 ### Solr Versions
 
-* 5.3.x and up   - use solr puppet module 0.5.x
+* 5.3.x and up   - use solr puppet module 6.x.x
 * 5.0.x to 5.2.x - use solr puppet module 0.4.x
 * 4.x.x          - use solr puppet module 0.2.2
 

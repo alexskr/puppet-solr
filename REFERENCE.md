@@ -31,10 +31,6 @@ If using Centos, the firewall rules need to be configured as shown:
     service iptables restart
    ```
 
-**COPYRIGHT**
-
-GPL-3.0+
-
 #### Examples
 
 ##### 
@@ -187,7 +183,7 @@ Default value: {}
 
 ##### `required_packages`
 
-Data type: `Array[String]`
+Data type: `Array`
 
 Specified in params and is platform dependent.
 
@@ -221,8 +217,9 @@ Default value: '9'
 ##### `log4j_rootlogger_loglevel`
 
 Data type: `Variant[
-    Enum['ALL', 'DEBUG', 'ERROR', 'FATAL', 'INFO', 'OFF', 'TRACE',
-      'TRACE_INT', 'WARN'],
+    Enum['ALL', 'DEBUG', 'ERROR', 'FATAL',
+        'INFO', 'OFF', 'TRACE',
+        'TRACE_INT', 'WARN'],
     String]`
 
 The loglevel to set for log4j.
@@ -231,7 +228,7 @@ Default value: 'INFO'
 
 ##### `schema_name`
 
-Data type: `Optional[String]`
+Data type: `Optional`
 
 The Solr cores' schema name. This should be set to `schema.xml` if using
 the classic schema.xml method. If using a managed schema, set this to
@@ -245,7 +242,7 @@ Default value: `undef`
 
 ##### `ssl_key_store`
 
-Data type: `Optional[String]`
+Data type: `Optional`
 
 The path to the key store.  If the key store is in the solr's home/etc
 directory, than can be etc/KEY_STORE_FILE
@@ -254,7 +251,7 @@ Default value: `undef`
 
 ##### `ssl_key_store_password`
 
-Data type: `Optional[String]`
+Data type: `Optional`
 
 The secret password of the key store.  Required if ssl_key_store is set.
 
@@ -262,7 +259,7 @@ Default value: `undef`
 
 ##### `ssl_key_store_type`
 
-Data type: `Optional[String]`
+Data type: `Optional`
 
 The type of key store.
 
@@ -270,7 +267,7 @@ Default value: 'JKS'
 
 ##### `ssl_trust_store`
 
-Data type: `Optional[String]`
+Data type: `Optional`
 
 If ssl_key_store is set and ssl_trust_store is undef, the settings
 will use the key store as the trust store.  This can be set to
@@ -280,7 +277,7 @@ Default value: `undef`
 
 ##### `ssl_trust_store_password`
 
-Data type: `Optional[String]`
+Data type: `Optional`
 
 The password to the trust store.  If undef and ssl_key_store_password
 is set, the trust store password will use the key store's password.
@@ -289,7 +286,7 @@ Default value: `undef`
 
 ##### `ssl_trust_store_type`
 
-Data type: `Optional[String]`
+Data type: `Optional`
 
 The type of trust store.
 
@@ -313,7 +310,7 @@ Default value: `undef`
 
 ##### `ssl_client_key_store`
 
-Data type: `Optional[String]`
+Data type: `Optional`
 
 If undef, will use values set for ssl_key_store for clients.
 
@@ -321,7 +318,7 @@ Default value: `undef`
 
 ##### `ssl_client_key_store_password`
 
-Data type: `Optional[String]`
+Data type: `Optional`
 
 If undef, will use values set for ssl_key_store_password for clients.
 
@@ -329,7 +326,7 @@ Default value: `undef`
 
 ##### `ssl_client_trust_store`
 
-Data type: `Optional[String]`
+Data type: `Optional`
 
 If undef, will use values set for ssl_trust_store for clients.
 
@@ -337,7 +334,7 @@ Default value: `undef`
 
 ##### `ssl_client_trust_store_password`
 
-Data type: `Optional[String]`
+Data type: `Optional`
 
 If undef, will use values set for ssl_trust_store_password for clients.
 

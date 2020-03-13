@@ -1,9 +1,15 @@
 # Solr Puppet Module Changelog
 
+## 2020-03-13 Version 6.0.0
+
+- Updated module to be PDK compliant for Puppet 6.
+- Changed version to 6.x.x to demonstrate Puppet 6 compatiblity.
+- Updated vagrant testing dependencies.
+
 ## 2020-01-06 Release 0.9.0
 
 - Fixed a bug in a template where a variable that could have an undef value was being used in a function that required a non undef value.
-- wget pupet module has been depricated, so wget puppet module has been replaced by [Archive](https://forge.puppet.com/puppet/archive).
+- wget pupet module has been deprecated, so wget puppet module has been replaced by [Archive](https://forge.puppet.com/puppet/archive).
 - Removed timeout parameter as its no longer applicable due to archive replacing wget.
 - Updated systemd puppet module version dependency.
 - Updated apt puppet module version dependency.

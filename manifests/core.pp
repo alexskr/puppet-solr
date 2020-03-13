@@ -1,46 +1,46 @@
 # @summary Sets up a core based on the example core installed by default.
 #
-# @param [String] core_name
+# @param core_name
 #   The name of the core (must be unique).
 #
-# @param [Boolean] replace
+# @param replace
 #   Whether or not files should be updated if they are different from the source
 #   specified.
 #
-# @param [String] currency_src_file
+# @param currency_src_file
 #   The currency file for the core.  It can either be a local file
 #   (managed outside of this module) or a remote file served through a puppet
 #   file server (puppet:///).
 #
-# @param [Array] other_files
+# @param other_files
 #   An array of hashes to create file resources.
 #
-# @param [String] protwords_src_file
+# @param protwords_src_file
 #   The schema file for the core.  It can either be a local file
 #   (managed outside of this module) or a remote file served through a puppet
 #   file server (puppet:///).
 #
-# @param [String] schema_src_file
+# @param schema_src_file
 #   The schema file for the core.  It can either be a local file
 #   (managed outside of this module) or a remote file served through a puppet
 #   file server (puppet:///).
 #
-# @param [String] solrconfig_src_file
+# @param solrconfig_src_file
 #   The schema file for the core.  It can either be a local file
 #   (managed outside of this module) or a remote file served through a puppet
 #   file server (puppet:///).
 #
-# @param [String] stopwords_src_file
+# @param stopwords_src_file
 #   The schema file for the core.  It can either be a local file
 #   (managed outside of this module) or a remote file served through a puppet
 #   file server (puppet:///).
 #
-# @param [String] synonyms_src_file
+# @param synonyms_src_file
 #   The schema file for the core.  It can either be a local file
 #   (managed outside of this module) or a remote file served through a puppet
 #   file server (puppet:///).
 #
-# @param [String] elevate_src_file
+# @param elevate_src_file
 #   The elevate file for the core.  It can either be a local file
 #   (managed outside of this module) or a remote file served through a puppet
 #   file server (puppet:///).
@@ -57,9 +57,6 @@ define solr::core (
   String  $synonyms_src_file          = "${::solr::basic_dir}/synonyms.txt",
   Optional[String] $elevate_src_file  = undef,
 ){
-
-# "${::solr::basic_dir}/currency.xml",
-# "${::solr::basic_dir}/elevate.xml",
 
   # The base class must be included first because core uses variables from
   # base class

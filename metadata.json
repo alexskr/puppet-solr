@@ -3,7 +3,7 @@
   "version": "0.2.1",
   "author": "Landcare Research",
   "summary": "Configures and Installs Apache Solr",
-  "license": "GPL-3.0+",
+  "license": "GPL-3.0-or-later",
   "source": "https://bitbucket.org/landcareresearch/puppet-solr",
   "project_page": "https://bitbucket.org/landcareresearch/puppet-solr",
   "issues_url": "https://bitbucket.org/landcareresearch/puppet-solr/issues",
@@ -47,7 +47,7 @@
       "version_requirement": ">= 4.10.0 < 7.0.0"
     }
   ],
-  "pdk-version": "1.15.0",
-  "template-url": "pdk-default#1.15.0",
-  "template-ref": "tags/1.15.0-0-g0bc522e"
+  "pdk-version": "1.17.0",
+  "template-url": "pdk-default#1.17.0",
+  "template-ref": "tags/1.17.0-0-gd3a4319"
 }
