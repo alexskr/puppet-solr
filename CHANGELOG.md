@@ -1,5 +1,9 @@
 # Solr Puppet Module Changelog
 
+## 2021-01-26 Version 6.0.1
+
+- Fixed the testing environment to use Puppet 6 instead of Puppet 5.
+
 ## 2020-03-13 Version 6.0.0
 
 - Updated module to be PDK compliant for Puppet 6.

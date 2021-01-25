@@ -8,10 +8,12 @@ if [ ! -d puppet/modules ] ; then
   mkdir -p puppet/modules
 fi
 
-CACHEDIR="puppet/g10k_cache"
-PUPPETFILE="puppet/Puppetfile"
-scripts/g10k -force -cachedir=$CACHEDIR -puppetfile -puppetfilelocation $PUPPETFILE -moduledir puppet/modules
+#CACHEDIR="puppet/g10k_cache"
+#PUPPETFILE="puppet/Puppetfile"
+#scripts/g10k -force -cachedir=$CACHEDIR -puppetfile -puppetfilelocation $PUPPETFILE -moduledir puppet/modules
+scripts/run_g10k.bash
 
+vagrant box update
 vagrant up --provision
 
 if [ $? -eq 0 ] ; then

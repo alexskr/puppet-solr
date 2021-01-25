@@ -3,7 +3,7 @@
 if [ ! -e /home/vagrant/.provision.txt ] ; then
 
   DISTRIB_CODENAME=$(lsb_release --codename --short)
-  DEB="puppet5-release-${DISTRIB_CODENAME}.deb"
+  DEB="puppet6-release-${DISTRIB_CODENAME}.deb"
 
   wget "https://apt.puppetlabs.com/${DEB}"
   dpkg -i $DEB
