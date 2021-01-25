@@ -23,6 +23,20 @@ class solr::config {
     group  => $solr::solr_user,
   }
 
+  # create empty solr log file
+  file { "${::solr::solr_logs}/solr.log":
+    ensure => present,
+    owner  => $solr::solr_user,
+    group  => $solr::solr_user,
+  }
+
+  # for cores to work without this module
+  file { $::solr::solr_core_home:
+    ensure => directory,
+    owner  => $solr::solr_user,
+    group  => $solr::solr_user,
+  }
+
   # After solr v 7.4.0 SOLR now uses log4j2.xml
   if versioncmp($solr::version, '7.4.0') >= 0 {
     # setup log4j2 configuration file.
@@ -65,6 +79,7 @@ class solr::config {
       solr_logs                       => $solr::solr_logs,
       solr_host                       => $solr::solr_host,
       solr_port                       => $solr::solr_port,
+      solr_timezone                   => $solr::solr_timezone,
       logger_config_file              => $logger_config_file,
       solr_environment                => $solr::solr_environment,
       ssl_key_store                   => $solr::ssl_key_store,

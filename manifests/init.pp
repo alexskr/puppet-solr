@@ -30,6 +30,9 @@
 # @param solr_port
 #   The network port used by Jetty
 #
+# @param solr_timezone
+#   The timezone used by Jetty
+#
 # @param solr_heap
 #   The heap size used by jetty.
 #
@@ -42,6 +45,9 @@
 # @param install_dir_mg
 #   Sets if this module should manage the install directory.
 #   True if this module should manage and false otherwise.
+#
+# @param install_options
+#   String of options to be passed to install_solr_service.sh script.
 #
 # @param solr_home
 #   The home directory for solr.
@@ -143,10 +149,12 @@ class solr (
   String            $solr_user                       = 'solr',
   String            $solr_host                       = '127.0.0.1',
   String            $solr_port                       = '8983',
+  String            $solr_timezone                   = 'UTC',
   String            $solr_heap                       = '512m',
   String            $solr_downloads                  = '/opt/solr_downloads',
   String            $install_dir                     = '/opt',
   Boolean           $install_dir_mg                  = false,
+  String            $install_options                 = '-n',
   String            $var_dir                         = '/var/solr',
   String            $solr_logs                       = '/var/log/solr',
   String            $solr_home                       = '/opt/solr/server/solr',

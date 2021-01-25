@@ -8,6 +8,7 @@
   String            $solr_logs,
   String            $solr_host,
   String            $solr_port,
+  String            $solr_timezone,
   String            $logger_config_file,
   Optional[Array]   $solr_environment                = undef,
   Optional[String]  $ssl_key_store                   = undef,
@@ -89,6 +90,7 @@ SOLR_HOST="<%= $solr_host -%>"
 
 # By default the start script uses UTC; override the timezone if needed
 #SOLR_TIMEZONE="UTC"
+SOLR_TIMEZONE="<%= $solr_timezone -%>"
 
 # Set to true to activate the JMX RMI connector to allow remote JMX client applications
 # to monitor the JVM hosting Solr; set to "false" to disable that behavior
