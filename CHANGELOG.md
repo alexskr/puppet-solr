@@ -4,6 +4,13 @@
 
 - Fixed the testing environment to use Puppet 6 instead of Puppet 5.
 
+The following changes are community contributions from [Issue 21](https://bitbucket.org/landcareresearch/puppet-solr/issues/21/fix-startup-add-timezone-and-manage-some).
+
+- Added an install_options variable with a default value of -n to prevent Solr from starting after it is first installed. This will prevent the init.d script and systemd service from failing after a fresh install (as they would try start Solr a second time, failing to bind to the Solr port). A reboot would normally fix this but it is also nice to have a way of controlling the install options. Note: I have only tested with systemd.
+- Added a paramter for setting the timezone.
+- Added an explicit definition for the solr.log file.
+- Added an explicit definition for the solr_core_home directory so that creating cores from the Solr admin console works (i.e. without defining cores in Puppet).
+
 ## 2020-03-13 Version 6.0.0
 
 - Updated module to be PDK compliant for Puppet 6.
