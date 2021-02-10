@@ -34,8 +34,8 @@ class solr::install {
   # download solr
   archive{$tarball:
     source   => "${solr::url}/${solr::version}/solr-${solr::version}.tgz",
-    username => $archive::url_user,
-    password => $archive::url_pass,
+    username => $solr::url_user,
+    password => $solr::url_pass,
     require  => File[$solr::solr_downloads],
   }
 
