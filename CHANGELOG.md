@@ -1,5 +1,9 @@
 # Solr Puppet Module Changelog
 
+## 2021-02-11 Version 6.0.2
+
+- Added user credentials for password protected sites for downloading the solr package.
+
 ## 2021-01-26 Version 6.0.1
 
 - Fixed the testing environment to use Puppet 6 instead of Puppet 5.

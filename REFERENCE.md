@@ -60,6 +60,22 @@ The url of the source repository for apache solr.
 
 Default value: 'http://archive.apache.org/dist/lucene/solr/'
 
+##### `url_user`
+
+Data type: `Optional[String]`
+
+If the URL is password protected, the user name.
+
+Default value: `undef`
+
+##### `url_pass`
+
+Data type: `Optional[String]`
+
+If the URL is password protected, the password.
+
+Default value: `undef`
+
 ##### `manage_user`
 
 Data type: `Boolean`
@@ -94,6 +110,14 @@ The network port used by Jetty
 
 Default value: '8983'
 
+##### `solr_timezone`
+
+Data type: `String`
+
+The timezone used by Jetty
+
+Default value: 'UTC'
+
 ##### `solr_heap`
 
 Data type: `String`
@@ -126,6 +150,14 @@ Sets if this module should manage the install directory.
 True if this module should manage and false otherwise.
 
 Default value: `false`
+
+##### `install_options`
+
+Data type: `String`
+
+String of options to be passed to install_solr_service.sh script.
+
+Default value: '-n'
 
 ##### `solr_home`
 
@@ -228,7 +260,7 @@ Default value: 'INFO'
 
 ##### `schema_name`
 
-Data type: `Optional`
+Data type: `Optional[String]`
 
 The Solr cores' schema name. This should be set to `schema.xml` if using
 the classic schema.xml method. If using a managed schema, set this to
@@ -242,7 +274,7 @@ Default value: `undef`
 
 ##### `ssl_key_store`
 
-Data type: `Optional`
+Data type: `Optional[String]`
 
 The path to the key store.  If the key store is in the solr's home/etc
 directory, than can be etc/KEY_STORE_FILE
@@ -251,7 +283,7 @@ Default value: `undef`
 
 ##### `ssl_key_store_password`
 
-Data type: `Optional`
+Data type: `Optional[String]`
 
 The secret password of the key store.  Required if ssl_key_store is set.
 
@@ -259,7 +291,7 @@ Default value: `undef`
 
 ##### `ssl_key_store_type`
 
-Data type: `Optional`
+Data type: `Optional[String]`
 
 The type of key store.
 
@@ -267,7 +299,7 @@ Default value: 'JKS'
 
 ##### `ssl_trust_store`
 
-Data type: `Optional`
+Data type: `Optional[String]`
 
 If ssl_key_store is set and ssl_trust_store is undef, the settings
 will use the key store as the trust store.  This can be set to
@@ -277,7 +309,7 @@ Default value: `undef`
 
 ##### `ssl_trust_store_password`
 
-Data type: `Optional`
+Data type: `Optional[String]`
 
 The password to the trust store.  If undef and ssl_key_store_password
 is set, the trust store password will use the key store's password.
@@ -286,7 +318,7 @@ Default value: `undef`
 
 ##### `ssl_trust_store_type`
 
-Data type: `Optional`
+Data type: `Optional[String]`
 
 The type of trust store.
 
@@ -310,7 +342,7 @@ Default value: `undef`
 
 ##### `ssl_client_key_store`
 
-Data type: `Optional`
+Data type: `Optional[String]`
 
 If undef, will use values set for ssl_key_store for clients.
 
@@ -318,7 +350,7 @@ Default value: `undef`
 
 ##### `ssl_client_key_store_password`
 
-Data type: `Optional`
+Data type: `Optional[String]`
 
 If undef, will use values set for ssl_key_store_password for clients.
 
@@ -326,7 +358,7 @@ Default value: `undef`
 
 ##### `ssl_client_trust_store`
 
-Data type: `Optional`
+Data type: `Optional[String]`
 
 If undef, will use values set for ssl_trust_store for clients.
 
@@ -334,7 +366,7 @@ Default value: `undef`
 
 ##### `ssl_client_trust_store_password`
 
-Data type: `Optional`
+Data type: `Optional[String]`
 
 If undef, will use values set for ssl_trust_store_password for clients.
 

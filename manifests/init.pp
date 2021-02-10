@@ -16,6 +16,12 @@
 # @param url
 #   The url of the source repository for apache solr.
 #
+# @param url_user
+#   If the URL is password protected, the user name.
+#
+# @param url_pass
+#   If the URL is password protected, the password.
+#
 # @param manage_user
 #   Whether to manage the solr user or not
 #
@@ -145,6 +151,8 @@
 class solr (
   String            $version                         = '6.2.0',
   String            $url                             = 'http://archive.apache.org/dist/lucene/solr/',
+  Optional[String]  $url_user                        = undef,
+  Optional[String]  $url_pass                        = undef,
   Boolean           $manage_user                     = true,
   String            $solr_user                       = 'solr',
   String            $solr_host                       = '127.0.0.1',
