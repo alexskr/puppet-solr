@@ -126,6 +126,16 @@ The heap size used by jetty.
 
 Default value: '512m'
 
+##### `solr_java_mem`
+
+Data type: `Optional[String]`
+
+If you want finer control over memory options, specify them directly with this variable.
+Arguments should be in the following format: "-Xms512m -Xmx512m"
+Note, the solr_heap parameter will not be used.
+
+Default value: `undef`
+
 ##### `solr_downloads`
 
 Data type: `String`
