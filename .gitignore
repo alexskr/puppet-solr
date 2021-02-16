@@ -31,3 +31,4 @@ vagrant/puppet/modules/
 vagrant/results.txt
 vagrant/scripts/run_g10k.bash
 *.patch
+*.log

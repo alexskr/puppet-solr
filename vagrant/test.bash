@@ -3,6 +3,7 @@
 TESTS=(
 "ubuntu16.04"
 "ubuntu18.04"
+"ubuntu20.04"
 "centos7.7"
 "centos6"
 )

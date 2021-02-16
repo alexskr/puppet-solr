@@ -72,6 +72,7 @@ class solr::config {
     content => epp('solr/solr.in.sh.epp',{
       java_home                       => $solr::java_home,
       solr_heap                       => $solr::solr_heap,
+      solr_java_mem                   => $solr::solr_java_mem,
       zk_hosts                        => $solr::zk_hosts,
       solr_pid_dir                    => $solr::solr_pid_dir,
       solr_home                       => $solr::solr_home,

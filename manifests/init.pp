@@ -42,6 +42,11 @@
 # @param solr_heap
 #   The heap size used by jetty.
 #
+# @param solr_java_mem
+#   If you want finer control over memory options, specify them directly with this variable.
+#   Arguments should be in the following format: "-Xms512m -Xmx512m"
+#   Note, the solr_heap parameter will not be used.
+#
 # @param solr_downloads
 #   Contains the solr tarballs and extracted dirs.
 #
@@ -159,6 +164,7 @@ class solr (
   String            $solr_port                       = '8983',
   String            $solr_timezone                   = 'UTC',
   String            $solr_heap                       = '512m',
+  Optional[String]  $solr_java_mem                   = undef,
   String            $solr_downloads                  = '/opt/solr_downloads',
   String            $install_dir                     = '/opt',
   Boolean           $install_dir_mg                  = false,

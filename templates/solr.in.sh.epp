@@ -1,6 +1,7 @@
 <%-| 
   String            $java_home,
   String            $solr_heap,
+  Optional[String]  $solr_java_mem                   = undef,
   Optional[Array]   $zk_hosts                        = undef,
   String            $solr_pid_dir,
   String            $solr_home,
@@ -45,12 +46,14 @@
 # affecting other Java applications on your server/workstation.
 SOLR_JAVA_HOME=<%= $java_home %>
 
-# Increase Java Heap as needed to support your indexing / query needs
-SOLR_HEAP=<%= $solr_heap %>
-
+<% if $solr_java_mem { %>
 # Expert: If you want finer control over memory options, specify them directly
 # Comment out SOLR_HEAP if you are using this though, that takes precedence
-#SOLR_JAVA_MEM="-Xms512m -Xmx512m"
+SOLR_JAVA_MEM="<%= $solr_java_mem %>"
+<% }else{ %>
+# Increase Java Heap as needed to support your indexing / query needs
+SOLR_HEAP=<%= $solr_heap %>
+<% } %>
 
 # Enable verbose GC logging
 #GC_LOG_OPTS="-verbose:gc -XX:+PrintHeapAtGC -XX:+PrintGCDetails \
