@@ -1,5 +1,9 @@
 # Solr Puppet Module Changelog
 
+## 2021-02-16 Version 6.0.4
+
+- Fix in the metadata file to enable Ubuntu 20.04.
+
 ## 2021-02-16 Version 6.0.3
 
 - Added support for directly managing the SOLR_JAVA_MEM parameter.  Usage of SOLR_JAVA_MEM disables the SOLR_HEAP parameter.
