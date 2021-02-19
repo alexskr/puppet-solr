@@ -1,5 +1,9 @@
 # Solr Puppet Module Changelog
 
+## 2021-02-19 Version 6.0.5
+
+- Fixed permissions issues for log4j configuration.
+
 ## 2021-02-16 Version 6.0.4
 
 - Fix in the metadata file to enable Ubuntu 20.04.

@@ -43,8 +43,8 @@ class solr::config {
     $logger_config_file = 'log4j2.xml'
     file { "${::solr::var_dir}/log4j2.xml":
       ensure  => file,
-      owner   => 'solr',
-      group   => 'solr',
+      owner   => $solr::solr_user,
+      group   => $solr::solr_user,
       content => epp('solr/log4j2.xml.epp',{
         log4j_rootlogger_loglevel => $solr::log4j_rootlogger_loglevel,
         log4j_maxfilesize         => $solr::log4j_maxfilesize,
@@ -56,8 +56,8 @@ class solr::config {
     $logger_config_file = 'log4j.properties'
     file { "${::solr::var_dir}/log4j.properties":
       ensure  => file,
-      owner   => 'solr',
-      group   => 'solr',
+      owner   => $solr::solr_user,
+      group   => $solr::solr_user,
       content => epp('solr/log4j.properties.epp',{
         log4j_rootlogger_loglevel => $solr::log4j_rootlogger_loglevel,
         log4j_maxfilesize         => $solr::log4j_maxfilesize,
