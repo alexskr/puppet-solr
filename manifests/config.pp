@@ -106,6 +106,8 @@ class solr::config {
         solr_port    => $solr::solr_port,
         solr_bin     => $solr::solr_bin,
         solr_env     => $solr::solr_env,
+        solr_user    => $solr::solr_user,
+        zk_service   => $solr::zk_service,
       }),
       require => File[$::solr::solr_env],
     }

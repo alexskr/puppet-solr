@@ -1,0 +1,103 @@
+diff --git manifests/config.pp manifests/config.pp
+index 22447c2..3e0a380 100644
+--- manifests/config.pp
++++ manifests/config.pp
+@@ -23,6 +23,20 @@ class solr::config {
+     group  => $solr::solr_user,
+   }
+ 
++  # create empty solr log file
++  file { "${::solr::solr_logs}/solr.log":
++    ensure => present,
++    owner  => $solr::solr_user,
++    group  => $solr::solr_user,
++  }
++
++  # for cores to work without this module
++  file { $::solr::solr_core_home:
++    ensure => directory,
++    owner  => $solr::solr_user,
++    group  => $solr::solr_user,
++  }
++
+   # After solr v 7.4.0 SOLR now uses log4j2.xml
+   if versioncmp($solr::version, '7.4.0') >= 0 {
+     # setup log4j2 configuration file.
+@@ -65,6 +79,7 @@ class solr::config {
+       solr_logs                       => $solr::solr_logs,
+       solr_host                       => $solr::solr_host,
+       solr_port                       => $solr::solr_port,
++      solr_timezone                   => $solr::solr_timezone,
+       logger_config_file              => $logger_config_file,
+       solr_environment                => $solr::solr_environment,
+       ssl_key_store                   => $solr::ssl_key_store,
+diff --git manifests/init.pp manifests/init.pp
+index c265a83..1e05263 100644
+--- manifests/init.pp
++++ manifests/init.pp
+@@ -30,6 +30,9 @@
+ # @param solr_port
+ #   The network port used by Jetty
+ #
++# @param solr_timezone
++#   The timezone used by Jetty
++#
+ # @param solr_heap
+ #   The heap size used by jetty.
+ #
+@@ -43,6 +46,9 @@
+ #   Sets if this module should manage the install directory.
+ #   True if this module should manage and false otherwise.
+ #
++# @param install_options
++#   String of options to be passed to install_solr_service.sh script.
++#
+ # @param solr_home
+ #   The home directory for solr.
+ #
+@@ -143,10 +149,12 @@ class solr (
+   String            $solr_user                       = 'solr',
+   String            $solr_host                       = '127.0.0.1',
+   String            $solr_port                       = '8983',
++  String            $solr_timezone                   = 'UTC',
+   String            $solr_heap                       = '512m',
+   String            $solr_downloads                  = '/opt/solr_downloads',
+   String            $install_dir                     = '/opt',
+   Boolean           $install_dir_mg                  = false,
++  String            $install_options                 = '-n',
+   String            $var_dir                         = '/var/solr',
+   String            $solr_logs                       = '/var/log/solr',
+   String            $solr_home                       = '/opt/solr/server/solr',
+diff --git manifests/install.pp manifests/install.pp
+index 3cb5c2e..4fc874f 100644
+--- manifests/install.pp
++++ manifests/install.pp
+@@ -49,7 +49,7 @@ class solr::install {
+   exec {'install_solr_service.sh':
+     command     => "${solr::solr_downloads}/install_solr_service.sh\
+   \"${tarball}\" -f -i \"${solr::install_dir}\" -d \"${solr::var_dir}\"\
+- -u ${solr::solr_user} -p ${solr::solr_port}",
++ -u ${solr::solr_user} -p ${solr::solr_port} ${solr::install_options}",
+     refreshonly => true,
+     subscribe   => Exec['extract install script'],
+     require     =>  User[$solr::solr_user]
+diff --git templates/solr.in.sh.epp templates/solr.in.sh.epp
+index c6e15ed..a033957 100644
+--- templates/solr.in.sh.epp
++++ templates/solr.in.sh.epp
+@@ -8,6 +8,7 @@
+   String            $solr_logs,
+   String            $solr_host,
+   String            $solr_port,
++  String            $solr_timezone,
+   String            $logger_config_file,
+   Optional[Array]   $solr_environment                = undef,
+   Optional[String]  $ssl_key_store                   = undef,
+@@ -89,6 +90,7 @@ SOLR_HOST="<%= $solr_host -%>"
+ 
+ # By default the start script uses UTC; override the timezone if needed
+ #SOLR_TIMEZONE="UTC"
++SOLR_TIMEZONE="<%= $solr_timezone -%>"
+ 
+ # Set to true to activate the JMX RMI connector to allow remote JMX client applications
+ # to monitor the JVM hosting Solr; set to "false" to disable that behavior

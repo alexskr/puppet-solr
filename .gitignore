@@ -25,10 +25,3 @@
 .project
 .envrc
 /inventory.yaml
-vagrant/.vagrant
-vagrant/puppet/g10k_cache/
-vagrant/puppet/modules/
-vagrant/results.txt
-vagrant/scripts/run_g10k.bash
-*.patch
-*.log

@@ -1,5 +1,12 @@
 # Solr Puppet Module Changelog
 
+## 2021-03-11 Version 6.0.6
+
+- Migrated to puppet-functional-tester for testing.
+- ISSUE 24 - Fixed ownership to use defined user instead of hard coded entry.
+- ISSUE 25 - Solr 8 warns the open file limit is too small so added configuration in systemd to fix.
+- ISSUE 26 - Added a parameter to prevent zookeeper service from starting before solr service.
+
 ## 2021-02-19 Version 6.0.5
 
 - Fixed permissions issues for log4j configuration.

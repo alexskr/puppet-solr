@@ -90,6 +90,10 @@
 # @param zk_hosts
 #   For configuring ZooKeeper ensemble.
 #
+# @param zk_service
+#   If Zookeeper is running on this node, ensure the Solr service starts
+#   before zk_service.
+#
 # @param log4j_maxfilesize
 #   Maximum allowed log file size (in bytes) before rolling over.
 #   Suffixes "KB", "MB" and "GB" are allowed.
@@ -177,6 +181,7 @@ class solr (
   Hash              $cores                           = {},
   Array             $required_packages               = $solr::params::required_packages,
   Optional[Array]   $zk_hosts                        = undef,
+  Optional[String]  $zk_service                      = undef,
   String            $log4j_maxfilesize               = '4MB',
   String            $log4j_maxbackupindex            = '9',
   Variant[

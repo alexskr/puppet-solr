@@ -239,6 +239,15 @@ For configuring ZooKeeper ensemble.
 
 Default value: `undef`
 
+##### `zk_service`
+
+Data type: `Optional[String]`
+
+If Zookeeper is running on this node, ensure the Solr service starts
+before zk_service.
+
+Default value: `undef`
+
 ##### `log4j_maxfilesize`
 
 Data type: `String`
