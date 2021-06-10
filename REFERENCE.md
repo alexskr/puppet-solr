@@ -213,6 +213,22 @@ server environment.
 
 Default value: `undef`
 
+##### `limit_nofile`
+
+Data type: `Integer`
+
+Sets number of open files limit in systemd service file.
+
+Default value: 65000
+
+##### `limit_nproc`
+
+Data type: `Integer`
+
+Sets number of processes limit in systemd service file.
+
+Default value: 65000
+
 ##### `cores`
 
 Data type: `Hash`

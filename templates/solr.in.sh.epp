@@ -44,7 +44,7 @@
 # By default the script will use JAVA_HOME to determine which java
 # to use, but you can set a specific path for Solr to use without
 # affecting other Java applications on your server/workstation.
-SOLR_JAVA_HOME=<%= $java_home %>
+SOLR_JAVA_HOME=<%= $java_home -%>
 
 <% if $solr_java_mem { %>
 # Expert: If you want finer control over memory options, specify them directly

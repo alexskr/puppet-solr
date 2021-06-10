@@ -5,6 +5,8 @@
   String           $solr_env,
   String           $solr_user,
   Optional[String] $zk_service,
+  Integer          $limit_nofile,
+  Integer          $limit_nproc,
 |-%>
 ####################################################################
 #### NOTE: THIS FILE IS PUPPET CONTROLLED - ANY CHAGES WILL BE LOST
@@ -24,8 +26,8 @@ ExecStatus=<%= $solr_bin %>/solr status -noprompt
 ExecReload=/bin/kill -s HUP $MAINPID
 User=<%= $solr_user %>
 PrivateTmp=true
-LimitNOFILE=65000
-LimitNPROC=65000
+LimitNOFILE=<%= $limit_nofile %>
+LimitNPROC=<%= $limit_nproc %>
 
 [Install]
 WantedBy=multi-user.target

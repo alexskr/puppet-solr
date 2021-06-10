@@ -79,6 +79,12 @@
 #   Bash style environment variables passed at the end of the solr
 #   server environment.
 #
+# @param limit_nofile
+#   Sets number of open files limit in systemd service file.
+#
+# @param limit_nproc
+#   Sets number of processes limit in systemd service file.
+#
 # @param cores
 #   An array of hashes that define a core which will be created with the
 #   create_resources function.
@@ -178,6 +184,8 @@ class solr (
   String            $solr_home                       = '/opt/solr/server/solr',
   String            $java_home                       = $solr::params::java_home,
   Optional[Array]   $solr_environment                = undef,
+  Integer           $limit_nofile                    = 65000,
+  Integer           $limit_nproc                     = 65000,
   Hash              $cores                           = {},
   Array             $required_packages               = $solr::params::required_packages,
   Optional[Array]   $zk_hosts                        = undef,

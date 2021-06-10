@@ -108,6 +108,8 @@ class solr::config {
         solr_env     => $solr::solr_env,
         solr_user    => $solr::solr_user,
         zk_service   => $solr::zk_service,
+        limit_nofile => $solr::limit_nofile,
+        limit_nproc  => $solr::limit_nproc,
       }),
       require => File[$::solr::solr_env],
     }

@@ -1,5 +1,9 @@
 # Solr Puppet Module Changelog
 
+## 2021-06-11 Version 6.0.7
+
+- ISSUE 27 - Added parameters for controlling the Limit's for NoFile and NProc.
+
 ## 2021-03-11 Version 6.0.6
 
 - Migrated to puppet-functional-tester for testing.
