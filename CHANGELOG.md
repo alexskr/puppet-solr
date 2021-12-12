@@ -1,5 +1,9 @@
 # Solr Puppet Module Changelog
 
+## 2021-12-13 Version 6.0.8
+
+- Changed the dependencies for systemd.
+
 ## 2021-06-11 Version 6.0.7
 
 - ISSUE 27 - Added parameters for controlling the Limit's for NoFile and NProc.
