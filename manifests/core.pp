@@ -71,7 +71,7 @@ define solr::core (
   # check solr version
   # parse the version to get first
   $version_array = split($::solr::version,'[.]')
-  $ver_major = $version_array[0]+0
+  $ver_major = Integer($version_array[0])
 
   file { $dest_dir:
     ensure  => directory,

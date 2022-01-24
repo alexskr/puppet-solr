@@ -1,5 +1,11 @@
 # Solr Puppet Module Changelog
 
+## 2022-01-24 Version 6.0.9
+
+- Updated systemd file to fix an issue on Redhat based systems.
+- Removed ExecRestart and ExecStatus from systemd configuration as is depricated.
+- Fixed a warning about String to Integer coercision for parsing major version.
+
 ## 2021-12-13 Version 6.0.8
 
 - Changed the dependencies for systemd.

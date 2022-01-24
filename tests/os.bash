@@ -4,4 +4,6 @@ TESTS=(
 "ubuntu16.04"
 "ubuntu18.04"
 "ubuntu20.04"
+"ubuntu21.04"
+"ubuntu21.10"
 )
