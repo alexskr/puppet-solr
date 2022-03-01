@@ -23,11 +23,13 @@ class solr::config {
     group  => $solr::solr_user,
   }
 
-  # create empty solr log file
-  file { "${::solr::solr_logs}/solr.log":
-    ensure => present,
-    owner  => $solr::solr_user,
-    group  => $solr::solr_user,
+  if versioncmp($solr::version, '6.0.0') >= 0 {
+    # create empty solr log file
+    file { "${::solr::solr_logs}/solr.log":
+      ensure => present,
+      owner  => $solr::solr_user,
+      group  => $solr::solr_user,
+    }
   }
 
   # for cores to work without this module
