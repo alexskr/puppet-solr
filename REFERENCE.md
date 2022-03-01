@@ -204,6 +204,14 @@ Default: (os specific)
 
 Default value: $solr::params::java_home
 
+##### `manage_java`
+
+Data type: `Boolean`
+
+True if this class should manage java and false if java is managed outside of this class.
+
+Default value: `true`
+
 ##### `solr_environment`
 
 Data type: `Optional[Array]`

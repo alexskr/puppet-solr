@@ -2,9 +2,10 @@
 
 ## 2022-03-02 Version 6.0.10
 
-- Removed a GC optimization in order for Java 9+ compatibility.
+- ISSUE 28 - Removed a GC optimization in order for Java 9+ compatibility.
 - Updated OS Version Facts.
 - Added a parameter for disabling java management.
+- ISSUE 29 - Fixed issue with Solr version 6+ and puppet management of log file.
 
 ## 2022-01-24 Version 6.0.9
 
