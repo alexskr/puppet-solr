@@ -1,5 +1,11 @@
 # Solr Puppet Module Changelog
 
+## 2022-03-02 Version 6.0.10
+
+- Removed a GC optimization in order for Java 9+ compatibility.
+- Updated OS Version Facts.
+- Added a parameter for disabling java management.
+
 ## 2022-01-24 Version 6.0.9
 
 - Updated systemd file to fix an issue on Redhat based systems.

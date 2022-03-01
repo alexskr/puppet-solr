@@ -75,6 +75,9 @@
 #     * Debian/Ubuntu: '/usr/lib/jvm/java-8-openjdk-amd64/jre'
 #     * CentOS/RHEL: '/usr/lib/jvm/jre-1.8.0'
 #
+# @param manage_java
+#   True if this class should manage java and false if java is managed outside of this class.
+#
 # @param solr_environment
 #   Bash style environment variables passed at the end of the solr
 #   server environment.
@@ -183,6 +186,7 @@ class solr (
   String            $solr_logs                       = '/var/log/solr',
   String            $solr_home                       = '/opt/solr/server/solr',
   String            $java_home                       = $solr::params::java_home,
+  Boolean           $manage_java                     = true,
   Optional[Array]   $solr_environment                = undef,
   Integer           $limit_nofile                    = 65000,
   Integer           $limit_nproc                     = 65000,

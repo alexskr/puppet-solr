@@ -9,6 +9,13 @@ class solr::install {
   # install requirements
   ensure_packages($solr::required_packages)
 
+  if $solr::manage_java {
+    ensure_packages($solr::java_package)
+    $required_package_dependencies = Package[$solr::required_packages,$solr::java_package]
+  }else{
+    $required_package_dependencies = Package[$solr::required_packages]
+  }
+
   ## create a solr user
   user {$solr::solr_user:
     ensure     => present,
@@ -16,7 +23,7 @@ class solr::install {
     system     => true,
     managehome => true,
     shell      => '/bin/bash',
-    require    => Package[$solr::required_packages],
+    require    => $required_package_dependencies,
   }
 
   # directory to store downloaded solr versions and install to
