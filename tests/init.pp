@@ -26,7 +26,7 @@ case $solr_java_version {
 
 class{'solr':
   #version     => '7.7.2',
-  version     => '8.11.1',
+  #version     => '8.11.1',
   #manage_java => false,
   #java_home   => $java_home,
 }

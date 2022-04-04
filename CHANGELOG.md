@@ -1,5 +1,11 @@
 # Solr Puppet Module Changelog
 
+## 2022-04-05 Version 6.0.11
+
+- ISSUE #30 Changed the default Solr version to 6.6.6.
+- ISSUE #30 Fixed a configuration error for solr versions less than 6.3.0.
+- Clarified documentation for install_options parameter.
+
 ## 2022-03-02 Version 6.0.10
 
 - ISSUE 28 - Removed a GC optimization in order for Java 9+ compatibility.

@@ -59,6 +59,9 @@
 #
 # @param install_options
 #   String of options to be passed to install_solr_service.sh script.
+#   The default option -n does not start Solr service after install, and does not abort on missing Java.
+#   Only valid for Solr version 6.3.0+.
+#   For versions less than 6.3.0, set to empty string.
 #
 # @param solr_home
 #   The home directory for solr.
@@ -167,7 +170,7 @@
 #   include solr
 #
 class solr (
-  String            $version                         = '6.2.0',
+  String            $version                         = '6.6.6',
   String            $url                             = 'http://archive.apache.org/dist/lucene/solr/',
   Optional[String]  $url_user                        = undef,
   Optional[String]  $url_pass                        = undef,
