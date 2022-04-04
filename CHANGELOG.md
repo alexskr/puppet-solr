@@ -1,5 +1,9 @@
 # Solr Puppet Module Changelog
 
+## 2022-04-05 Version 6.0.12
+
+- Reverted a change to the installation option for versions less than 6.3.0 (the change was in error).
+
 ## 2022-04-05 Version 6.0.11
 
 - ISSUE #30 Changed the default Solr version to 6.6.6.

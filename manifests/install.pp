@@ -54,16 +54,20 @@ class solr::install {
     subscribe   => Archive[$tarball],
   }
 
-  if versioncmp($solr::version,'6.2.1') == 1 {
     $service_command  = "${solr::solr_downloads}/install_solr_service.sh\
   \"${tarball}\" -f -i \"${solr::install_dir}\" -d \"${solr::var_dir}\"\
  -u ${solr::solr_user} -p ${solr::solr_port} ${solr::install_options}"
-  }else{
-    # version 2.2.1 and less do not have a -d parameter.
-    $service_command  = "${solr::solr_downloads}/install_solr_service.sh\
-  \"${tarball}\" -f -i \"${solr::install_dir}\"\
- -u ${solr::solr_user} -p ${solr::solr_port} ${solr::install_options}"
-  }
+
+#  if versioncmp($solr::version,'6.2.1') == 1 {
+#    $service_command  = "${solr::solr_downloads}/install_solr_service.sh\
+#  \"${tarball}\" -f -i \"${solr::install_dir}\" -d \"${solr::var_dir}\"\
+# -u ${solr::solr_user} -p ${solr::solr_port} ${solr::install_options}"
+#  }else{
+#    # version 2.2.1 and less do not have a -d parameter.
+#    $service_command  = "${solr::solr_downloads}/install_solr_service.sh\
+#  \"${tarball}\" -f -i \"${solr::install_dir}\"\
+# -u ${solr::solr_user} -p ${solr::solr_port} ${solr::install_options}"
+#  }
 
   # run install script
   exec {'install_solr_service.sh':
