@@ -66,6 +66,9 @@
 # @param solr_home
 #   The home directory for solr.
 #
+# @param solr_options
+#   Additional options added to java start command line in addition to other options.
+#
 # @param var_dir
 #   The var directory for solr.
 #
@@ -188,6 +191,7 @@ class solr (
   String            $var_dir                         = '/var/solr',
   String            $solr_logs                       = '/var/log/solr',
   String            $solr_home                       = '/opt/solr/server/solr',
+  Optional[Array]   $solr_options                    = undef,
   String            $java_home                       = $solr::params::java_home,
   Boolean           $manage_java                     = true,
   Optional[Array]   $solr_environment                = undef,

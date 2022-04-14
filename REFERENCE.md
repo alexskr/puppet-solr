@@ -180,6 +180,14 @@ The home directory for solr.
 
 Default value: '/opt/solr/server/solr'
 
+##### `solr_options`
+
+Data type: `Optional[Array]`
+
+Additional options added to java start command line in addition to other options.
+
+Default value: `undef`
+
 ##### `var_dir`
 
 Data type: `String`

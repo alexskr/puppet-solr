@@ -1,5 +1,9 @@
 # Solr Puppet Module Changelog
 
+## 2022-04-14 Version 7.0.1
+
+- Added parameter for managing start up command's options.
+
 ## 2022-04-08 Version 7.0.0
 
 - Added Puppet 7 Compatibility.

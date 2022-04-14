@@ -22,6 +22,7 @@
   Optional[String]  $ssl_client_key_store_password   = undef,
   Optional[String]  $ssl_client_trust_store          = undef,
   Optional[String]  $ssl_client_trust_store_password = undef,
+  Optional[Array]   $solr_options                    = undef,
 |-%>
 ####################################################################
 #### NOTE: THIS FILE IS PUPPET CONTROLLED - ANY CHAGES WILL BE LOST
@@ -108,6 +109,9 @@ ENABLE_REMOTE_JMX_OPTS="false"
 #SOLR_OPTS="$SOLR_OPTS -Dsolr.autoSoftCommit.maxTime=3000"
 #SOLR_OPTS="$SOLR_OPTS -Dsolr.autoCommit.maxTime=60000"
 #SOLR_OPTS="$SOLR_OPTS -Dsolr.clustering.enabled=true"
+<%- if $solr_options {-%>
+SOLR_OPTS="$SOLR_OPTS <%= $solr_options.join(' ') -%>"
+<%- } -%>
 
 # Location where the bin/solr script will save PID files for running instances
 # If not set, the script will create PID files in $SOLR_TIP/bin

@@ -95,6 +95,7 @@ class solr::config {
       ssl_client_key_store_password   => $solr::ssl_client_key_store_password,
       ssl_client_trust_store          => $solr::ssl_client_trust_store,
       ssl_client_trust_store_password => $solr::ssl_client_trust_store_password,
+      solr_options                    => $solr::solr_options,
     }),
     require => File[$::solr::solr_logs],
   }

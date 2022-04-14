@@ -25,6 +25,7 @@ case $solr_java_version {
 #}
 
 class{'solr':
+  #solr_options => [ '-Dlog4j2.formatMsgNoLookups=true'],
   #version     => '7.7.2',
   version     => '8.11.1',
   #manage_java => false,
