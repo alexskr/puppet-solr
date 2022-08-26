@@ -119,6 +119,15 @@
 # @param log4j_rootlogger_loglevel
 #   The loglevel to set for log4j.
 #
+# @param log4j_console
+#   The log4j console configuration.
+#
+# @param log4j_console_layout
+#   The log4j console layout configuration.
+#
+# @param log4j_console_layout_conversion
+#   The log4j console layout conversion pattern configuration.
+#
 # @param schema_name
 #   The Solr cores' schema name. This should be set to `schema.xml` if using
 #   the classic schema.xml method. If using a managed schema, set this to
@@ -205,24 +214,29 @@ class solr (
   String            $log4j_maxbackupindex            = '9',
   Variant[
     Enum['ALL', 'DEBUG', 'ERROR', 'FATAL',
-        'INFO', 'OFF', 'TRACE',
-        'TRACE_INT', 'WARN'],
-    String]         $log4j_rootlogger_loglevel       = 'INFO',
+      'INFO', 'OFF', 'TRACE',
+      'TRACE_INT', 'WARN',
+    ],
+    String
+  ]                 $log4j_rootlogger_loglevel       = 'INFO',
+  String            $log4j_console                   = 'org.apache.log4j.ConsoleAppender',
+  String            $log4j_console_layout            = 'org.apache.log4j.EnhancedPatternLayout',
+  String            $log4j_console_layout_conversion =
+    '%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p (%t) [%X{collection} %X{shard} %X{replica} %X{core}] %c{1.} %m%n',
   Optional[String]  $schema_name                     = undef,
   Optional[String]  $ssl_key_store                   = undef,
   Optional[String]  $ssl_key_store_password          = undef,
-  Optional[String]  $ssl_key_store_type              = 'JKS',
+  String            $ssl_key_store_type              = 'JKS',
   Optional[String]  $ssl_trust_store                 = undef,
   Optional[String]  $ssl_trust_store_password        = undef,
-  Optional[String]  $ssl_trust_store_type            = 'JKS',
+  String            $ssl_trust_store_type            = 'JKS',
   Optional[Boolean] $ssl_need_client_auth            = undef,
   Optional[Boolean] $ssl_want_client_auth            = undef,
   Optional[String]  $ssl_client_key_store            = undef,
   Optional[String]  $ssl_client_key_store_password   = undef,
   Optional[String]  $ssl_client_trust_store          = undef,
   Optional[String]  $ssl_client_trust_store_password = undef,
-) inherits ::solr::params{
-
+) inherits solr::params {
   ## === Variables === ##
   $solr_env       = $solr::params::solr_env
   # The directory that contains cores.
@@ -236,7 +250,7 @@ class solr (
   # The directory to the basic configuration example core.
   if versioncmp($solr::version, '7.0.0') >= 0 {
     $basic_dir    = "${solr_server}/solr/configsets/_default/conf"
-  }else{
+  } else {
     $basic_dir    = "${solr_server}/solr/configsets/basic_configs/conf"
   }
 

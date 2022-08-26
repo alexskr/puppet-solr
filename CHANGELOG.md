@@ -1,5 +1,10 @@
 # Solr Puppet Module Changelog
 
+## 2022-08-26 Version 7.0.2
+
+- Updated syntax for PDK linting.
+- ISSUE #18 Added console logging for older versions of solr.
+
 ## 2022-04-14 Version 7.0.1
 
 - Added parameter for managing start up command's options.

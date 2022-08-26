@@ -2,6 +2,9 @@
   String $log4j_rootlogger_loglevel,
   String $log4j_maxfilesize,
   String $log4j_maxbackupindex,
+  String $log4j_console,
+  String $log4j_console_layout,
+  String $log4j_console_layout_conversion,
 |-%>
 ####################################################################
 #### NOTE: THIS FILE IS PUPPET CONTROLLED - ANY CHAGES WILL BE LOST
@@ -11,9 +14,9 @@ solr.log=${solr.log.dir}
 log4j.rootLogger=<%= $log4j_rootlogger_loglevel %>, file, CONSOLE
 
 # Console appender will be programmatically disabled when Solr is started with option -Dsolr.log.muteconsole
-log4j.appender.CONSOLE=org.apache.log4j.ConsoleAppender
-log4j.appender.CONSOLE.layout=org.apache.log4j.EnhancedPatternLayout
-log4j.appender.CONSOLE.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p (%t) [%X{collection} %X{shard} %X{replica} %X{core}] %c{1.} %m%n
+log4j.appender.CONSOLE=<%= $log4j_console %>
+log4j.appender.CONSOLE.layout=<%= $log4j_console_layout %>
+log4j.appender.CONSOLE.layout.ConversionPattern=<%= $log4j_console_layout_conversion %>
 
 #- size rotation with log cleanup.
 log4j.appender.file=org.apache.log4j.RollingFileAppender

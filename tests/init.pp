@@ -24,12 +24,13 @@ case $solr_java_version {
 #  package      => "openjdk-${solr_java_version}-jre",
 #}
 
-class{'solr':
+class { 'solr':
   #solr_options => [ '-Dlog4j2.formatMsgNoLookups=true'],
+  version     => '7.3.0',
   #version     => '7.7.2',
-  version     => '8.11.1',
+  #version     => '8.11.1',
   #manage_java => false,
   #java_home   => $java_home,
 }
 
-solr::core{'test':}
+solr::core { 'test': }
