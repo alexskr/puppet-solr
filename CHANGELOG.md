@@ -1,9 +1,10 @@
 # Solr Puppet Module Changelog
 
-## 2022-08-26 Version 7.0.2
+## 2022-08-29 Version 7.0.2
 
 - Updated syntax for PDK linting.
 - ISSUE #18 Added console logging for older versions of solr.
+- ISSUE #32 Added parameters for managing remote JMX Options.
 - Added Ubuntu 22.04 support.
 
 ## 2022-04-14 Version 7.0.1
