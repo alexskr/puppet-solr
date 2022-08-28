@@ -4,6 +4,7 @@
 
 - Updated syntax for PDK linting.
 - ISSUE #18 Added console logging for older versions of solr.
+- Added Ubuntu 22.04 support.
 
 ## 2022-04-14 Version 7.0.1
 

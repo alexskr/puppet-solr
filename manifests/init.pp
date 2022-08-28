@@ -128,6 +128,12 @@
 # @param log4j_console_layout_conversion
 #   The log4j console layout conversion pattern configuration.
 #
+# @param enable_remote_jmx
+#   Uses enable_remote_jmx_opts in the configuration.
+#
+# @param remote_jmx_port
+#   The port to use for remote jmx connections.
+#
 # @param schema_name
 #   The Solr cores' schema name. This should be set to `schema.xml` if using
 #   the classic schema.xml method. If using a managed schema, set this to
@@ -223,6 +229,8 @@ class solr (
   String            $log4j_console_layout            = 'org.apache.log4j.EnhancedPatternLayout',
   String            $log4j_console_layout_conversion =
     '%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p (%t) [%X{collection} %X{shard} %X{replica} %X{core}] %c{1.} %m%n',
+  Boolean           $enable_remote_jmx               = false,
+  Optional[String]  $remote_jmx_port                 = undef,
   Optional[String]  $schema_name                     = undef,
   Optional[String]  $ssl_key_store                   = undef,
   Optional[String]  $ssl_key_store_password          = undef,

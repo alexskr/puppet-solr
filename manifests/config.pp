@@ -86,6 +86,8 @@ class solr::config {
         solr_port                       => $solr::solr_port,
         solr_timezone                   => $solr::solr_timezone,
         logger_config_file              => $logger_config_file,
+        enable_remote_jmx               => $solr::enable_remote_jmx,
+        remote_jmx_port                 => $solr::remote_jmx_port,
         solr_environment                => $solr::solr_environment,
         ssl_key_store                   => $solr::ssl_key_store,
         ssl_key_store_password          => $solr::ssl_key_store_password,
