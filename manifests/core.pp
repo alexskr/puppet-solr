@@ -50,48 +50,47 @@ define solr::core (
   Boolean $replace                    = true,
   Optional[String] $currency_src_file = undef,
   Array   $other_files                = [],
-  String  $protwords_src_file         = "${::solr::basic_dir}/protwords.txt",
-  String  $schema_src_file            = "${::solr::basic_dir}/${solr::schema_filename}",
-  String  $solrconfig_src_file        = "${::solr::basic_dir}/solrconfig.xml",
-  String  $stopwords_src_file         = "${::solr::basic_dir}/stopwords.txt",
-  String  $synonyms_src_file          = "${::solr::basic_dir}/synonyms.txt",
+  String  $protwords_src_file         = "${solr::basic_dir}/protwords.txt",
+  String  $schema_src_file            = "${solr::basic_dir}/${solr::schema_filename}",
+  String  $solrconfig_src_file        = "${solr::basic_dir}/solrconfig.xml",
+  String  $stopwords_src_file         = "${solr::basic_dir}/stopwords.txt",
+  String  $synonyms_src_file          = "${solr::basic_dir}/synonyms.txt",
   Optional[String] $elevate_src_file  = undef,
-){
-
+) {
   # The base class must be included first because core uses variables from
   # base class
   if ! defined(Class['solr']) {
     fail('You must include the solr base class before using any solr defined resources')
   }
 
-  $dest_dir    = "${::solr::solr_core_home}/${core_name}"
+  $dest_dir    = "${solr::solr_core_home}/${core_name}"
   $conf_dir    = "${dest_dir}/conf"
   $schema_file = "${conf_dir}/${solr::schema_filename}"
 
   # check solr version
   # parse the version to get first
-  $version_array = split($::solr::version,'[.]')
-  $ver_major = $version_array[0]+0
+  $version_array = split($solr::version,'[.]')
+  $ver_major = Integer($version_array[0])
 
   file { $dest_dir:
     ensure  => directory,
-    owner   => $::solr::solr_user,
-    group   => $::solr::solr_user,
+    owner   => $solr::solr_user,
+    group   => $solr::solr_user,
     require => Class['solr::config'],
   }
 
   # create the conf directory
   file { $conf_dir:
     ensure  => directory,
-    owner   => $::solr::solr_user,
-    group   => $::solr::solr_user,
+    owner   => $solr::solr_user,
+    group   => $solr::solr_user,
     require => File[$dest_dir],
   }
 
   file { "${conf_dir}/solrconfig.xml":
     ensure  => file,
-    owner   => $::solr::solr_user,
-    group   => $::solr::solr_user,
+    owner   => $solr::solr_user,
+    group   => $solr::solr_user,
     source  => $solrconfig_src_file,
     replace => $replace,
     require => File[$conf_dir],
@@ -100,8 +99,8 @@ define solr::core (
 
   file { "${conf_dir}/synonyms.txt":
     ensure  => file,
-    owner   => $::solr::solr_user,
-    group   => $::solr::solr_user,
+    owner   => $solr::solr_user,
+    group   => $solr::solr_user,
     source  => $synonyms_src_file,
     replace => $replace,
     require => File["${conf_dir}/solrconfig.xml"],
@@ -110,8 +109,8 @@ define solr::core (
 
   file { "${conf_dir}/protwords.txt":
     ensure  => file,
-    owner   => $::solr::solr_user,
-    group   => $::solr::solr_user,
+    owner   => $solr::solr_user,
+    group   => $solr::solr_user,
     source  => $protwords_src_file,
     replace => $replace,
     require => File["${conf_dir}/synonyms.txt"],
@@ -120,8 +119,8 @@ define solr::core (
 
   file { "${conf_dir}/stopwords.txt":
     ensure  => file,
-    owner   => $::solr::solr_user,
-    group   => $::solr::solr_user,
+    owner   => $solr::solr_user,
+    group   => $solr::solr_user,
     source  => $stopwords_src_file,
     replace => $replace,
     require => File["${conf_dir}/protwords.txt"],
@@ -129,8 +128,8 @@ define solr::core (
   }
 
   exec { "${core_name}_copy_lang":
-    command => "/bin/cp -r ${::solr::basic_dir}/lang ${conf_dir}/.",
-    user    => $::solr::solr_user,
+    command => "/bin/cp -r ${solr::basic_dir}/lang ${conf_dir}/.",
+    user    => $solr::solr_user,
     creates => "${conf_dir}/lang/stopwords_en.txt",
     require => File["${conf_dir}/stopwords.txt"],
     notify  => Class['solr::service'],
@@ -139,8 +138,8 @@ define solr::core (
   if $currency_src_file {
     file { "${conf_dir}/currency.xml":
       ensure  => file,
-      owner   => $::solr::solr_user,
-      group   => $::solr::solr_user,
+      owner   => $solr::solr_user,
+      group   => $solr::solr_user,
       source  => $currency_src_file,
       replace => $replace,
       require => Exec["${core_name}_copy_lang"],
@@ -151,8 +150,8 @@ define solr::core (
   if $elevate_src_file {
     file { "${conf_dir}/elevate.xml":
       ensure  => file,
-      owner   => $::solr::solr_user,
-      group   => $::solr::solr_user,
+      owner   => $solr::solr_user,
+      group   => $solr::solr_user,
       source  => $elevate_src_file,
       replace => $replace,
       require => Exec["${core_name}_copy_lang"],
@@ -162,8 +161,8 @@ define solr::core (
 
   file { $schema_file:
     ensure  => file,
-    owner   => $::solr::solr_user,
-    group   => $::solr::solr_user,
+    owner   => $solr::solr_user,
+    group   => $solr::solr_user,
     source  => $schema_src_file,
     replace => $replace,
     require => Exec["${core_name}_copy_lang"],
@@ -172,24 +171,23 @@ define solr::core (
 
   $defaults = {
     'ensure'  => file,
-    'owner'   => $::solr::solr_user,
-    'group'   => $::solr::solr_user,
+    'owner'   => $solr::solr_user,
+    'group'   => $solr::solr_user,
     'replace' => $replace,
     'require' => File[$conf_dir],
     'notify'  => Class['solr::service'],
     'before'  => File["${dest_dir}/core.properties"],
   }
   create_resources(file, other_files($other_files, $conf_dir), $defaults)
-
   file { "${dest_dir}/core.properties":
     ensure  => file,
-    content => inline_template(
-"name=${core_name}
+    content => inline_template (
+      "name=${core_name}
 config=solrconfig.xml
 schema=${solr::schema_filename}
-dataDir=data"),
+dataDir=data"
+    ),
     require => File[$schema_file],
     notify  => Service['solr'],
   }
-
 }

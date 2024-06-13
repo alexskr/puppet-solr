@@ -24,17 +24,16 @@ define solr::shared_lib (
   String           $path         = $solr::solr_lib_dir,
   Optional[String] $web_user     = undef,
   Optional[String] $web_password = undef,
-){
-
+) {
   # variables
   if $filename {
     $lib_name       = $filename
-  }else {
+  } else {
     $lib_name_array = split($url,'/')
     $lib_name       = $lib_name_array[-1]
   }
 
-  archive{"${path}/${lib_name}":
+  archive { "${path}/${lib_name}":
     source   => $url,
     user     => $web_user,
     password => $web_password,

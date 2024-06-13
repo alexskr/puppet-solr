@@ -59,9 +59,15 @@
 #
 # @param install_options
 #   String of options to be passed to install_solr_service.sh script.
+#   The default option -n does not start Solr service after install, and does not abort on missing Java.
+#   Only valid for Solr version 6.3.0+.
+#   For versions less than 6.3.0, set to empty string.
 #
 # @param solr_home
 #   The home directory for solr.
+#
+# @param solr_options
+#   Additional options added to java start command line in addition to other options.
 #
 # @param var_dir
 #   The var directory for solr.
@@ -74,6 +80,9 @@
 #   Default: (os specific)
 #     * Debian/Ubuntu: '/usr/lib/jvm/java-8-openjdk-amd64/jre'
 #     * CentOS/RHEL: '/usr/lib/jvm/jre-1.8.0'
+#
+# @param manage_java
+#   True if this class should manage java and false if java is managed outside of this class.
 #
 # @param solr_environment
 #   Bash style environment variables passed at the end of the solr
@@ -109,6 +118,21 @@
 #
 # @param log4j_rootlogger_loglevel
 #   The loglevel to set for log4j.
+#
+# @param log4j_console
+#   The log4j console configuration.
+#
+# @param log4j_console_layout
+#   The log4j console layout configuration.
+#
+# @param log4j_console_layout_conversion
+#   The log4j console layout conversion pattern configuration.
+#
+# @param enable_remote_jmx
+#   Uses enable_remote_jmx_opts in the configuration.
+#
+# @param remote_jmx_port
+#   The port to use for remote jmx connections.
 #
 # @param schema_name
 #   The Solr cores' schema name. This should be set to `schema.xml` if using
@@ -164,7 +188,7 @@
 #   include solr
 #
 class solr (
-  String            $version                         = '6.2.0',
+  String            $version                         = '6.6.6',
   String            $url                             = 'http://archive.apache.org/dist/lucene/solr/',
   Optional[String]  $url_user                        = undef,
   Optional[String]  $url_pass                        = undef,
@@ -182,7 +206,9 @@ class solr (
   String            $var_dir                         = '/var/solr',
   String            $solr_logs                       = '/var/log/solr',
   String            $solr_home                       = '/opt/solr/server/solr',
+  Optional[Array]   $solr_options                    = undef,
   String            $java_home                       = $solr::params::java_home,
+  Boolean           $manage_java                     = true,
   Optional[Array]   $solr_environment                = undef,
   Integer           $limit_nofile                    = 65000,
   Integer           $limit_nproc                     = 65000,
@@ -194,24 +220,31 @@ class solr (
   String            $log4j_maxbackupindex            = '9',
   Variant[
     Enum['ALL', 'DEBUG', 'ERROR', 'FATAL',
-        'INFO', 'OFF', 'TRACE',
-        'TRACE_INT', 'WARN'],
-    String]         $log4j_rootlogger_loglevel       = 'INFO',
+      'INFO', 'OFF', 'TRACE',
+      'TRACE_INT', 'WARN',
+    ],
+    String
+  ]                 $log4j_rootlogger_loglevel       = 'INFO',
+  String            $log4j_console                   = 'org.apache.log4j.ConsoleAppender',
+  String            $log4j_console_layout            = 'org.apache.log4j.EnhancedPatternLayout',
+  String            $log4j_console_layout_conversion =
+    '%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p (%t) [%X{collection} %X{shard} %X{replica} %X{core}] %c{1.} %m%n',
+  Boolean           $enable_remote_jmx               = false,
+  Optional[String]  $remote_jmx_port                 = undef,
   Optional[String]  $schema_name                     = undef,
   Optional[String]  $ssl_key_store                   = undef,
   Optional[String]  $ssl_key_store_password          = undef,
-  Optional[String]  $ssl_key_store_type              = 'JKS',
+  String            $ssl_key_store_type              = 'JKS',
   Optional[String]  $ssl_trust_store                 = undef,
   Optional[String]  $ssl_trust_store_password        = undef,
-  Optional[String]  $ssl_trust_store_type            = 'JKS',
+  String            $ssl_trust_store_type            = 'JKS',
   Optional[Boolean] $ssl_need_client_auth            = undef,
   Optional[Boolean] $ssl_want_client_auth            = undef,
   Optional[String]  $ssl_client_key_store            = undef,
   Optional[String]  $ssl_client_key_store_password   = undef,
   Optional[String]  $ssl_client_trust_store          = undef,
   Optional[String]  $ssl_client_trust_store_password = undef,
-) inherits ::solr::params{
-
+) inherits solr::params {
   ## === Variables === ##
   $solr_env       = $solr::params::solr_env
   # The directory that contains cores.
@@ -225,7 +258,7 @@ class solr (
   # The directory to the basic configuration example core.
   if versioncmp($solr::version, '7.0.0') >= 0 {
     $basic_dir    = "${solr_server}/solr/configsets/_default/conf"
-  }else{
+  } else {
     $basic_dir    = "${solr_server}/solr/configsets/basic_configs/conf"
   }
 

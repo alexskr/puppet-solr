@@ -50,7 +50,7 @@ Data type: `String`
 
 The version to install.
 
-Default value: '6.2.0'
+Default value: '6.6.6'
 
 ##### `url`
 
@@ -166,6 +166,9 @@ Default value: `false`
 Data type: `String`
 
 String of options to be passed to install_solr_service.sh script.
+The default option -n does not start Solr service after install, and does not abort on missing Java.
+Only valid for Solr version 6.3.0+.
+For versions less than 6.3.0, set to empty string.
 
 Default value: '-n'
 
@@ -176,6 +179,14 @@ Data type: `String`
 The home directory for solr.
 
 Default value: '/opt/solr/server/solr'
+
+##### `solr_options`
+
+Data type: `Optional[Array]`
+
+Additional options added to java start command line in addition to other options.
+
+Default value: `undef`
 
 ##### `var_dir`
 
@@ -203,6 +214,14 @@ Default: (os specific)
   * CentOS/RHEL: '/usr/lib/jvm/jre-1.8.0'
 
 Default value: $solr::params::java_home
+
+##### `manage_java`
+
+Data type: `Boolean`
+
+True if this class should manage java and false if java is managed outside of this class.
+
+Default value: `true`
 
 ##### `solr_environment`
 
@@ -285,13 +304,55 @@ Default value: '9'
 
 Data type: `Variant[
     Enum['ALL', 'DEBUG', 'ERROR', 'FATAL',
-        'INFO', 'OFF', 'TRACE',
-        'TRACE_INT', 'WARN'],
-    String]`
+      'INFO', 'OFF', 'TRACE',
+      'TRACE_INT', 'WARN',
+    ],
+    String
+  ]`
 
 The loglevel to set for log4j.
 
 Default value: 'INFO'
+
+##### `log4j_console`
+
+Data type: `String`
+
+The log4j console configuration.
+
+Default value: 'org.apache.log4j.ConsoleAppender'
+
+##### `log4j_console_layout`
+
+Data type: `String`
+
+The log4j console layout configuration.
+
+Default value: 'org.apache.log4j.EnhancedPatternLayout'
+
+##### `log4j_console_layout_conversion`
+
+Data type: `String`
+
+The log4j console layout conversion pattern configuration.
+
+Default value: '%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p (%t) [%X{collection} %X{shard} %X{replica} %X{core}] %c{1.} %m%n'
+
+##### `enable_remote_jmx`
+
+Data type: `Boolean`
+
+Uses enable_remote_jmx_opts in the configuration.
+
+Default value: `false`
+
+##### `remote_jmx_port`
+
+Data type: `Optional[String]`
+
+The port to use for remote jmx connections.
+
+Default value: `undef`
 
 ##### `schema_name`
 
@@ -326,7 +387,7 @@ Default value: `undef`
 
 ##### `ssl_key_store_type`
 
-Data type: `Optional[String]`
+Data type: `String`
 
 The type of key store.
 
@@ -353,7 +414,7 @@ Default value: `undef`
 
 ##### `ssl_trust_store_type`
 
-Data type: `Optional[String]`
+Data type: `String`
 
 The type of trust store.
 
@@ -476,7 +537,7 @@ The schema file for the core.  It can either be a local file
 (managed outside of this module) or a remote file served through a puppet
 file server (puppet:///).
 
-Default value: "${::solr::basic_dir}/protwords.txt"
+Default value: "${solr::basic_dir}/protwords.txt"
 
 ##### `schema_src_file`
 
@@ -486,7 +547,7 @@ The schema file for the core.  It can either be a local file
 (managed outside of this module) or a remote file served through a puppet
 file server (puppet:///).
 
-Default value: "${::solr::basic_dir}/${solr::schema_filename}"
+Default value: "${solr::basic_dir}/${solr::schema_filename}"
 
 ##### `solrconfig_src_file`
 
@@ -496,7 +557,7 @@ The schema file for the core.  It can either be a local file
 (managed outside of this module) or a remote file served through a puppet
 file server (puppet:///).
 
-Default value: "${::solr::basic_dir}/solrconfig.xml"
+Default value: "${solr::basic_dir}/solrconfig.xml"
 
 ##### `stopwords_src_file`
 
@@ -506,7 +567,7 @@ The schema file for the core.  It can either be a local file
 (managed outside of this module) or a remote file served through a puppet
 file server (puppet:///).
 
-Default value: "${::solr::basic_dir}/stopwords.txt"
+Default value: "${solr::basic_dir}/stopwords.txt"
 
 ##### `synonyms_src_file`
 
@@ -516,7 +577,7 @@ The schema file for the core.  It can either be a local file
 (managed outside of this module) or a remote file served through a puppet
 file server (puppet:///).
 
-Default value: "${::solr::basic_dir}/synonyms.txt"
+Default value: "${solr::basic_dir}/synonyms.txt"
 
 ##### `elevate_src_file`
 

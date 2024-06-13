@@ -17,15 +17,16 @@ Description=Apache SOLR
 After=syslog.target network.target remote-fs.target nss-lookup.target <%- unless $zk_service == undef { %> <%= $zk_service %><% } %>
 
 [Service]
+Type=forking
 PIDFile=<%= $solr_pid_dir %>/solr-<%= $solr_port %>.pid
 Environment=SOLR_INCLUDE=<%= $solr_env %>
 ExecStart=<%= $solr_bin %>/solr start -noprompt
-ExecRestart=<%= $solr_bin %>/solr restart -noprompt
 ExecStop=<%= $solr_bin %>/solr stop -noprompt
-ExecStatus=<%= $solr_bin %>/solr status -noprompt
 ExecReload=/bin/kill -s HUP $MAINPID
+Restart=always
 User=<%= $solr_user %>
 PrivateTmp=true
+TimeoutSec=180s
 LimitNOFILE=<%= $limit_nofile %>
 LimitNPROC=<%= $limit_nproc %>
 

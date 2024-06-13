@@ -1,5 +1,47 @@
 # Solr Puppet Module Changelog
 
+## 2022-08-29 Version 7.0.2
+
+- Updated syntax for PDK linting.
+- ISSUE #18 Added console logging for older versions of solr.
+- ISSUE #32 Added parameters for managing remote JMX Options.
+- Added Ubuntu 22.04 support.
+
+## 2022-04-14 Version 7.0.1
+
+- Added parameter for managing start up command's options.
+
+## 2022-04-08 Version 7.0.0
+
+- Added Puppet 7 Compatibility.
+
+## 2022-04-05 Version 6.0.12
+
+- Reverted a change to the installation option for versions less than 6.3.0 (the change was in error).
+
+## 2022-04-05 Version 6.0.11
+
+- ISSUE #30 Changed the default Solr version to 6.6.6.
+- ISSUE #30 Fixed a configuration error for solr versions less than 6.3.0.
+- Clarified documentation for install_options parameter.
+
+## 2022-03-02 Version 6.0.10
+
+- ISSUE 28 - Removed a GC optimization in order for Java 9+ compatibility.
+- Updated OS Version Facts.
+- Added a parameter for disabling java management.
+- ISSUE 29 - Fixed issue with Solr version 6+ and puppet management of log file.
+
+## 2022-01-24 Version 6.0.9
+
+- Updated systemd file to fix an issue on Redhat based systems.
+- Removed ExecRestart and ExecStatus from systemd configuration as is depricated.
+- Fixed a warning about String to Integer coercision for parsing major version.
+
+## 2021-12-13 Version 6.0.8
+
+- Changed the dependencies for systemd.
+
 ## 2021-06-11 Version 6.0.7
 
 - ISSUE 27 - Added parameters for controlling the Limit's for NoFile and NProc.
