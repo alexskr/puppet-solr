@@ -286,7 +286,7 @@ class solr (
   Class['solr::install'] -> Class['solr::config']
   Class['solr::config'] ~> Class['solr::service']
 
-  if is_hash($cores) {
+  if $cores and $cores != {} {
     create_resources(::solr::core, $cores)
   }
 }
