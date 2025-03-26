@@ -16,13 +16,15 @@ class solr::install {
   }
 
   ## create a solr user
-  user { $solr::solr_user:
-    ensure     => present,
-    home       => $solr::var_dir,
-    system     => true,
-    managehome => true,
-    shell      => '/bin/bash',
-    require    => $required_package_dependencies,
+  if $solr::manage_user {
+    user { $solr::solr_user:
+      ensure     => present,
+      home       => $solr::var_dir,
+      system     => true,
+      managehome => true,
+      shell      => '/bin/bash',
+      require    => $required_package_dependencies,
+    }
   }
 
   # directory to store downloaded solr versions and install to
