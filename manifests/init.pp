@@ -249,7 +249,7 @@ class solr (
   $solr_env       = $solr::params::solr_env
   # The directory that contains cores.
   $solr_core_home = $solr_home
-  $solr_pid_dir   = $var_dir
+  $solr_pid_dir   = '/run/solr'
   $solr_bin       = "${install_dir}/solr/bin"
   $solr_server    = "${install_dir}/solr/server"
   # The directory to install shared libraries for use by solr.

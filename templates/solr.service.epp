@@ -29,6 +29,7 @@ PrivateTmp=true
 TimeoutSec=180s
 LimitNOFILE=<%= $limit_nofile %>
 LimitNPROC=<%= $limit_nproc %>
+RuntimeDirectory=solr
 
 [Install]
 WantedBy=multi-user.target
